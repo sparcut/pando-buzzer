@@ -9,7 +9,7 @@ const buzzer = document.getElementById('buzzer');
 buzzer.addEventListener('click', sendBuzz);
 
 function sendBuzz() {
-  if(name == '') {
+  if(nameInput.value == '') {
     alert('Please enter a name...');
     return;
   }
