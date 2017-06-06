@@ -1,0 +1,40 @@
+body {
+  font-family: 'Roboto', sans-serif
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.buzz {
+  text-align: center;
+  font-size: 18px;
+}
+
+.buzz:nth-child(1) {
+  font-size: 150px
+}
+
+.buzz:nth-child(2) {
+  font-size: 75px
+}
+
+.buzz:nth-child(3) {
+  font-size: 36px;
+}
+
+#reset-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 100ms ease-in-out;
+}
+
+#reset-button:hover {
+  opacity: 1;
+}

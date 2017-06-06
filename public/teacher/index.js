@@ -4,11 +4,22 @@ socket.on('connect', () => {
 });
 
 const output = document.getElementById('container');
+const resetButton = document.getElementById('reset-button');
+let buzzed = [];
+
+resetButton.addEventListener('click', resetBoard);
 
 socket.on('buzz', handleBuzz);
 
 function handleBuzz(data) {
-  console.log(data);
-  const newBuzz = ` <div class="buzz">${data.name}</div>`;
-  output.innerHTML = newBuzz + output.innerHTML;
+  if(buzzed.includes(data.id) === false) {
+    buzzed.push(data.id);
+    const newBuzz = ` <div class="buzz">${data.name}</div>`;
+    output.innerHTML = output.innerHTML + newBuzz; 
+  }
+}
+
+function resetBoard() {
+  buzzed = [];
+  output.innerHTML = '';
 }

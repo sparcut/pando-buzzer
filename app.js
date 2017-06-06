@@ -20,10 +20,11 @@ io.on('connection', (socket) => {
     socket.join(room);
     socket.lastRoom = room;
     
-    console.log(' ++ User Connected - Room: ' + room);
+    // console.log(' ++ User Connected - Room: ' + room);
   });
 
   socket.on('buzz', (data) => {
+    data.id = socket.id
     data.time = new Date();
     io.sockets.in('teachers').emit('buzz', data);
   });

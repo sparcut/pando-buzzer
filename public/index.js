@@ -3,12 +3,12 @@ socket.on('connect', () => {
   socket.emit('room', 'students');
 });
 
-const name_input = document.getElementById('name');
+const nameInput = document.getElementById('name');
 const buzzer = document.getElementById('buzzer');
 
 let name = ''; 
 
-name_input.addEventListener('keyup', (e) => name = e.target.value);
+nameInput.addEventListener('keyup', (e) => name = e.target.value);
 buzzer.addEventListener('click', sendBuzz);
 
 function sendBuzz() {
