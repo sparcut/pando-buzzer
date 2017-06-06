@@ -8,7 +8,7 @@ const buzzer = document.getElementById('buzzer');
 
 let name = ''; 
 
-nameInput.addEventListener('keyup', (e) => name = e.target.value);
+nameInput.addEventListener('input', (e) => name = e.target.value);
 buzzer.addEventListener('click', sendBuzz);
 
 function sendBuzz() {
