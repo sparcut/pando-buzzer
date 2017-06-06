@@ -6,9 +6,6 @@ socket.on('connect', () => {
 const nameInput = document.getElementById('name');
 const buzzer = document.getElementById('buzzer');
 
-let name = ''; 
-
-nameInput.addEventListener('input', (e) => name = e.target.value);
 buzzer.addEventListener('click', sendBuzz);
 
 function sendBuzz() {
@@ -17,5 +14,5 @@ function sendBuzz() {
     return;
   }
   
-  socket.emit('buzz', { name: name });
+  socket.emit('buzz', { name: nameInput.value });
 }
