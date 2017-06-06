@@ -4,14 +4,10 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-const prettyjson = require('prettyjson');
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/', (req, res) => {
-//   res.redirect('/');
-// });
 
 io.on('connection', (socket) => {
   
