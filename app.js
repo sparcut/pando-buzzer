@@ -4,19 +4,32 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-app.use(express.static(__dirname + 'public'), () => {
-  
-});
+const prettyjson = require('prettyjson');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+// app.get('/', (req, res) => {
+//   res.redirect('/');
+// });
 
 io.on('connection', (socket) => {
-  console.log(' ++ User Connected');
   
-  socket.on('newUser', (data) => {
+  socket.on('room', (room) => {
+    if(socket.lastRoom) {
+      socket.leave(socket.lastRoom);
+      socket.lastRoom = null;
+    }
     
+    socket.join(room);
+    socket.lastRoom = room;
+    
+    console.log(' ++ User Connected - Room: ' + room);
   });
-  
-  socket.on('press', (data) => {
-    socket.broadcast.emit('press', data);
+
+  socket.on('buzz', (data) => {
+    data.time = new Date();
+    io.sockets.in('teachers').emit('buzz', data);
   });
 });
 
