@@ -3,13 +3,13 @@ socket.on('connect', () => {
   socket.emit('room', 'teachers');
 });
 
-const leaderBoardContainer = document.getElementById('container');
-const resetButton = document.getElementById('reset-button');
+const LeaderBoard = document.getElementById('container');
+const ResetButton = document.getElementById('reset-button');
 
 const NAME_LENGTH_LIMIT = 20;
 let buzzed = [];
 
-resetButton.addEventListener('click', resetBoard);
+ResetButton.addEventListener('click', resetBoard);
 
 socket.on('buzz', handleBuzz);
 
@@ -21,7 +21,7 @@ function handleBuzz(data) {
     const limitedName = data.name.length < NAME_LENGTH_LIMIT ? data.name : data.name.substr(0, NAME_LENGTH_LIMIT); 
     const newBuzz = `<div class="buzz" id="${data.id}">${limitedName}</div>`;
     
-    leaderBoardContainert.innerHTML += newBuzz; 
+    LeaderBoard.innerHTML += newBuzz; 
   }
 }
 
