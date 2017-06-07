@@ -25,15 +25,16 @@ io.on('connection', (socket) => {
     // console.log(' ++ User Connected - Room: ' + room);
   });
 
-  socket.on('buzz', (data) => {
-    if(data.name.length > NAME_LENGTH_LIMIT) data.name = data.name.substr(0, NAME_LENGTH_LIMIT) + '...';
+  socket.on('buzz', (sessionData) => {    
+    if(sessionData.name > 255) sessionData.name = sessionData.name.substr(0, 255);
     
-    data.name = data.name.replace(/[<>]/g, '');
+    const emitData = {
+      "id": socket.id,
+      "name": sessionData.name.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+      "date": new Date()
+    }
     
-    console.log(' -- Buzz from ' + data.name);
-    data.id = socket.id
-    data.time = new Date();
-    io.sockets.in('teachers').emit('buzz', data);
+    io.sockets.in('teachers').emit('buzz', emitData);
   });
 });
 
