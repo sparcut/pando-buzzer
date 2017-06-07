@@ -27,6 +27,8 @@ io.on('connection', (socket) => {
 
   socket.on('buzz', (data) => {
     if(data.name.length > NAME_LENGTH_LIMIT) data.name = data.name.substr(0, NAME_LENGTH_LIMIT) + '...';
+    
+    console.log(' -- Buzz from ' + data.name);
     data.id = socket.id
     data.time = new Date();
     io.sockets.in('teachers').emit('buzz', data);
