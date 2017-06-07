@@ -24,6 +24,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('buzz', (data) => {
+    if(data.name.length > 15) data.name = data.name.substr(0, 15) + '...';
     data.id = socket.id
     data.time = new Date();
     io.sockets.in('teachers').emit('buzz', data);
