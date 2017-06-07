@@ -6,6 +6,8 @@ const io = require('socket.io')(http);
 
 const path = require('path');
 
+const NAME_LENGTH_LIMIT = 30;
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -24,7 +26,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('buzz', (data) => {
-    if(data.name.length > 15) data.name = data.name.substr(0, 15) + '...';
+    if(data.name.length > NAME_LENGTH_LIMIT) data.name = data.name.substr(0, NAME_LENGTH_LIMIT) + '...';
     data.id = socket.id
     data.time = new Date();
     io.sockets.in('teachers').emit('buzz', data);
